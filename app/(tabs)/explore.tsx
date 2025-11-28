@@ -1,112 +1,143 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { Collapsible } from '@/components/ui/collapsible';
 import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
+import { Collapsible } from '@/components/ui/collapsible';
+import { router } from 'expo-router';
+import React from 'react';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function TabTwoScreen() {
+export default function ExploreScreen() {
+  // Quick navigation to the registration form
+  const handleRegisterNow = () => {
+    router.push('/(tabs)/register'); // TODO: maybe add some animation here
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Explore
-        </ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
+    <ThemedView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">Explore Features</ThemedText>
+          <ThemedText style={styles.subtitle}>
+            Learn about the registration system functionality and implementation
+          </ThemedText>
+        </ThemedView>
+
+        <ThemedView style={styles.contentContainer}>
+          <ThemedView style={styles.section}>
+            <ThemedText type="subtitle">Project Overview</ThemedText>
+            <ThemedText style={styles.description}>
+              This educational project demonstrates a complete registration flow using React Native 
+              and Expo. The implementation includes form validation, user confirmation, and success feedback.
             </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+          </ThemedView>
+
+          <ThemedView style={styles.actionSection}>
+            <TouchableOpacity
+              style={styles.primaryButton}
+              onPress={handleRegisterNow}
+            >
+              <ThemedText style={styles.buttonText}>Try Registration Flow</ThemedText>
+            </TouchableOpacity>
+          </ThemedView>
+        </ThemedView>
+
+        <Collapsible title="Platform Compatibility">
+          <ThemedText style={styles.collapsibleText}>
+            This application works across multiple platforms:
+          </ThemedText>
+          <ThemedView style={styles.platformList}>
+            <ThemedText style={styles.platformItem}>• Web browsers (Chrome, Firefox, Safari)</ThemedText>
+            <ThemedText style={styles.platformItem}>• iOS devices and simulators</ThemedText>
+            <ThemedText style={styles.platformItem}>• Android devices and emulators</ThemedText>
+          </ThemedView>
+          <ExternalLink href="https://docs.expo.dev/router/introduction">
+            <ThemedText type="link">Learn more about Expo Router</ThemedText>
+          </ExternalLink>
+        </Collapsible>
+      </ScrollView>
+    </ThemedView>
   );
 }
-
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    padding: 20,
   },
   titleContainer: {
-    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 40,
+    paddingTop: 20,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 8,
+    opacity: 0.8,
+  },
+  contentContainer: {
+    gap: 24,
+  },
+  section: {
+    marginBottom: 24,
+  },
+  description: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginTop: 8,
+  },
+  stepsList: {
+    marginTop: 12,
+    gap: 12,
+  },
+  step: {
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  actionSection: {
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  primaryButton: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    alignItems: 'center',
+    minWidth: 200,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  collapsibleText: {
+    marginBottom: 12,
+    lineHeight: 22,
+  },
+  techList: {
     gap: 8,
+  },
+  techItem: {
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  objectivesList: {
+    gap: 12,
+  },
+  objective: {
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  platformList: {
+    marginBottom: 16,
+    gap: 8,
+  },
+  platformItem: {
+    fontSize: 16,
+    lineHeight: 22,
   },
 });
