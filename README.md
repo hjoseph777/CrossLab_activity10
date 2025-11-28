@@ -1,7 +1,8 @@
 ## CrossLab Activity 10 - Registration Flow Demo (Expo) Project
 
-## Project Metadata
-- Author: Cross Platform Mobile Development
+## Project Details
+- Course: Cross Platform Mobile Development
+- Author: Harry Joseph
 - Created: 2025-11-27
 - Platform: Expo (React Native + TypeScript + Expo Router)
 - Package Manager: npm
